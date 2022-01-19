@@ -1,38 +1,116 @@
-.App {
-  text-align: center;
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+
+body {
+    height: 100vh;
+    background-color: darksalmon;
+    color: #333333;
+    --cell-size: 50px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+h1 {
+    flex-basis: 100%;
+    vertical-align: middle;
+    padding: 50px;
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    letter-spacing: 10px;
+}
+
+.sudoku-grid {
+  display: inline-grid;
+  grid-template-columns: repeat(9, var(--cell-size));
+  column-gap: 1px;
+  row-gap: 1px;
+  margin: auto auto;
+  background-color: gray;
+  border: 2px solid gray;
+  box-shadow: 0px 0px 0px 0px green;
+}
+.wrap {
+    width: 462px;
+    height: 462px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.grid-item {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  flex-flow: row wrap;
+  position: relative;
 }
 
-.App-link {
-  color: #61dafb;
+.grid-item:focus-within:before {
+    content: "";
+    position: absolute;
+    top: -450px;
+    height: 1000px;
+    width: var(--cell-size);
+    z-index: 1;
+    background-color: rgba(255, 99, 71, 0.233);
+    pointer-events: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.grid-item:focus-within:after {
+    content: "";
+    position: absolute;
+    top: 0px;
+    left: -450px;
+    width: 1000px;
+    height: var(--cell-size);
+    z-index: 1;
+    background-color: rgba(255, 99, 71, 0.233);
+    pointer-events: none;
+}
+
+/* .grid-item:focus-within {
+    background-color: rgb(255, 174, 174);
+} */
+
+.grid-item,
+.grid-item input {
+  display: block;
+  width: var(--cell-size);
+  height: var(--cell-size);
+}
+
+.grid-item input {
+    position: relative;
+    padding: 0;
+    border: 0px;
+    box-sizing: border-box;
+    cursor: pointer;
+    caret-color: transparent;
+    text-align: center;
+    font-family: monospace;
+    font-size: 32px;
+    color: #333333;
+}
+
+.grid-item.bottom-line input {
+    border-bottom: 2px solid gray;
+}
+
+.grid-item.right-line input {
+    border-right: 2px solid gray;
+}
+
+.grid-item input:hover {
+    background-color: rgba(219, 219, 219, 0.274);
+}
+
+.grid-item input:focus {
+    z-index: 1;
+    outline: 3px solid rgb(153, 163, 255);
 }
